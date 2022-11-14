@@ -15,7 +15,7 @@ public class InfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        request.setAttribute("ad", DaoFactory.getAdsDao().getAdInfo(id));
+        //request.setAttribute("ad", DaoFactory.getAdsDao().getAdInfo(id));
         request.getRequestDispatcher("/WEB-INF/ads/info.jsp").forward(request, response);
     }
 }
