@@ -11,13 +11,12 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <h2>Your Ads</h2>
         <c:forEach var="ad" items="${ads}">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">${ad.title}</h5>
-                    <p class="card-text">${ad.description}</p>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                </div>
+            <div class="col-md-6">
+                <h2>${ad.title}</h2>
+                <p>${ad.description}</p>
+<%--                <a href="#" class="btn btn-primary">Edit</a>--%>
             </div>
         </c:forEach>
     </div>
