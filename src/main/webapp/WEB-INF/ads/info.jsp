@@ -1,15 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="View Add Info" />
-    </jsp:include>
+    <title>Item Info</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
-<div class="container">
-    Test
-</div>
-
+  <h1>Item Information</h1>
+  <p>Ad ID: ${ad.id}</p>
+  <p>Item: ${ad.title}</p>
+  <p>Description: ${ad.description}</p>
+  <p>Created By: ${ad.userId}</p>
 </body>
 </html>
