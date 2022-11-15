@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
@@ -56,7 +57,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public List<Ad> getUserAds(int user_id) {
+    public List<Ad> user(int user_id) {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = ?");
@@ -67,6 +68,7 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
