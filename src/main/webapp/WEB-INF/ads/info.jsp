@@ -8,6 +8,6 @@
   <p>Ad ID: ${ad.id}</p>
   <p>Item: ${ad.title}</p>
   <p>Description: ${ad.description}</p>
-  <p>Created By: ${ad.userId}</p>
+  <p>Created By: ${user.username}</p>
 </body>
 </html>
