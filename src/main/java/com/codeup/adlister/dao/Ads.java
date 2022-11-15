@@ -9,6 +9,8 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
-    // get a list of all of a users ads
+    // get a list of all of a users ads with user's id
     List<Ad> user(int user_id);
+    // get one add with ad's id
+    Ad one(int ad_id);
 }
