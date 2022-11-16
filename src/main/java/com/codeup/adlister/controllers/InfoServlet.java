@@ -22,10 +22,9 @@ public class InfoServlet extends HttpServlet {
         Ad ad = DaoFactory.getAdsDao().one(adId);
         User user = DaoFactory.getUsersDao().findById((int)ad.getUserId());
         List<Category> categories = DaoFactory.getAds_CategoriesDao().categoriesInAd((int)ad.getId());
-        System.out.println(categories.get(0).getCategory());
 
         request.setAttribute("ad", ad);
-        request.setAttribute("categories", categories);
+        if (categories != null){ request.setAttribute("categories", categories); }
         request.setAttribute("user", user);
 
         request.getRequestDispatcher("/WEB-INF/ads/info.jsp")

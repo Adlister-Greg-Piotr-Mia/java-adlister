@@ -33,6 +33,12 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
+            <div class="form-group">
+                <c:forEach var="category" items="${categories}">
+                    <input name="category" type="checkbox" class="btn-check" id="${category.id}" value="${category.id}" autocomplete="off">
+                    <label for="${category.id}">${category.category}</label>
+                </c:forEach>
+            </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
