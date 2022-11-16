@@ -4,6 +4,7 @@ import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,7 @@ public class CreateAdServlet extends HttpServlet {
             .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         // Pass user input and store in a variable
         String title = request.getParameter("title");
@@ -31,8 +32,11 @@ public class CreateAdServlet extends HttpServlet {
         // validate input
         boolean inputHasErrors = title.isEmpty() || description.isEmpty();
 
+        // Alert user if input is empty
         if (inputHasErrors) {
-            response.sendRedirect("/ads/create");
+            request.setAttribute("error", "Can not have empty fields");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ads/create.jsp");
+            rd.forward(request, response);
             return;
         } else {
             User user = (User) request.getSession().getAttribute("user");
