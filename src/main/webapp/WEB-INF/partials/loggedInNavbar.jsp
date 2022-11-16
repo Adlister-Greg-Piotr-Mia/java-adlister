@@ -6,8 +6,10 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/ads/create">Create New Ad</a></li>
+            <li><a href="/ads/search">Search</a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a href="/logout">Logout</a></li>
+
         </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
