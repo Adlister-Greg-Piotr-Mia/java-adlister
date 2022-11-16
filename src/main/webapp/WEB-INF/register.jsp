@@ -19,6 +19,9 @@
 
     <div class="container">
         <h1>Please fill in your information.</h1>
+        <p style="color: red">
+            <c:out value="${error}"></c:out>
+        </p>
         <form action="/register" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
