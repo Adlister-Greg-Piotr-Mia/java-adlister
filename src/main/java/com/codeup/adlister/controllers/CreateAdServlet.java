@@ -16,7 +16,9 @@ import java.io.IOException;
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("/login");
+            // Intended Redirect after login
+            request.getSession().setAttribute("redirect", "/ads/create");
+            request.getRequestDispatcher("/login").forward(request, response);
             return;
         }
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
