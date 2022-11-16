@@ -15,8 +15,6 @@ import java.io.IOException;
 @WebServlet(name = "controllers.SearchAdsServlet", urlPatterns = "/ads/search")
 public class SearchAdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 //        if (request.getSession().getAttribute("user") == null) {
 //            // Intended Redirect after login
 //            request.getSession().setAttribute("redirect", "/ads/create");
@@ -30,16 +28,16 @@ public class SearchAdsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         // Pass user input and store in a variable
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
+
+        String search = request.getParameter("description");
 
         // validate input
-        boolean inputHasErrors = title.isEmpty() || description.isEmpty();
+        boolean inputHasErrors = search.isEmpty();
 
         // Alert user if input is empty
         if (inputHasErrors) {
             request.setAttribute("error", "Can not have empty fields");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ads/create.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ads/search.jsp");
             rd.forward(request, response);
             return;
         } else {
