@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,30 +17,40 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
+        // Check if there are empty fields
+        boolean inputHasErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty();
+
         // Check if username already exit
         boolean userExist = DaoFactory.getUsersDao().findByUsername(username) != null;
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation)
-            || userExist);
+        // Check if password matches
+        boolean passwordMatch = ! password.equals(passwordConfirmation);
 
-        if (inputHasErrors) {
-            response.sendRedirect("/register");
-            return;
+        if(inputHasErrors) {
+            request.setAttribute("error", "Can not have empty fields");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/register.jsp");
+            rd.forward(request, response);
+        } else if (userExist) {
+            request.setAttribute("error", "Username already exit");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/register.jsp");
+            rd.forward(request, response);
+        } else if (passwordMatch) {
+            request.setAttribute("error", "password does not match");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/register.jsp");
+            rd.forward(request, response);
+        } else {
+            // create and save a new user
+            User user = new User(username, email, password);
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/login");
         }
-
-        // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
     }
 }
