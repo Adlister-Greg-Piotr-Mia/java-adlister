@@ -21,6 +21,7 @@ public class CreateAdServlet extends HttpServlet {
             request.getRequestDispatcher("/login").forward(request, response);
             return;
         }
+        request.setAttribute("categories", DaoFactory.getCategoriesDao().all());
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -30,6 +31,8 @@ public class CreateAdServlet extends HttpServlet {
         // Pass user input and store in a variable
         String title = request.getParameter("title");
         String description = request.getParameter("description");
+        String categories = request.getParameter("category");
+        System.out.println(categories);
 
         // validate input
         boolean inputHasErrors = title.isEmpty() || description.isEmpty();
@@ -39,7 +42,6 @@ public class CreateAdServlet extends HttpServlet {
             request.setAttribute("error", "Can not have empty fields");
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/ads/create.jsp");
             rd.forward(request, response);
-            return;
         } else {
             User user = (User) request.getSession().getAttribute("user");
             Ad ad = new Ad(

@@ -21,6 +21,7 @@
   <p>Ad ID: ${ad.id}</p>
   <p>Item: ${ad.title}</p>
   <p>Description: ${ad.description}</p>
+  <p>Categories: <c:forEach var="category" items="${categories}">${category.category} </c:forEach> </p>
   <p>Created By: ${user.username}</p>
 </body>
 </html>

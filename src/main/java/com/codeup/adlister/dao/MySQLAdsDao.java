@@ -78,10 +78,9 @@ public class MySQLAdsDao implements Ads {
             List<Ad> ad = createAdsFromResults(stmt.executeQuery());
             return ad.get(0);
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding an by id", e);
+            throw new RuntimeException("Error finding an ad by id", e);
         }
     }
-
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(

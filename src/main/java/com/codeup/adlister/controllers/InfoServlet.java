@@ -1,7 +1,9 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.Categories;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "controllers.InfoServlet", urlPatterns = "/ads/info")
 public class InfoServlet extends HttpServlet {
@@ -18,8 +21,10 @@ public class InfoServlet extends HttpServlet {
         int adId = Integer.parseInt(request.getParameter("id"));
         Ad ad = DaoFactory.getAdsDao().one(adId);
         User user = DaoFactory.getUsersDao().findById((int)ad.getUserId());
+        List<Category> categories = DaoFactory.getAds_CategoriesDao().categoriesInAd((int)ad.getId());
 
         request.setAttribute("ad", ad);
+        if (categories != null){ request.setAttribute("categories", categories); }
         request.setAttribute("user", user);
 
         request.getRequestDispatcher("/WEB-INF/ads/info.jsp")
