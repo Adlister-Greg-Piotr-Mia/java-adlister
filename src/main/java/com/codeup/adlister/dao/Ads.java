@@ -13,4 +13,8 @@ public interface Ads {
     List<Ad> user(int user_id);
     // get one add with ad's id
     Ad one(int ad_id);
+
+    void deleteAd(int id);
+
+    void updateAd(int id, String default_title, String ad_description);
 }
