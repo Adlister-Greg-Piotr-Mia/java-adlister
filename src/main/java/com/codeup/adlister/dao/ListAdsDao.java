@@ -37,15 +37,6 @@ public class ListAdsDao implements Ads {
         return null;
     }
 
-    @Override
-    public void deleteAd(int id) {
-    }
-
-    @Override
-    public void updateAd(int id, String default_title, String ad_description) {
-
-    }
-
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

@@ -24,16 +24,7 @@
             <div class="col-md-6">
                 <h2><a href="/ads/info?id=${ad.id}">${ad.title}</a></h2>
                 <p>${ad.description}</p>
-                <%--Delete Ad Form--%>
-                <form action="/delete" method="post">
-                    <input type="hidden" name="ad_id" value="${ad.id}">
-                    <input class="btn btn-primary btn-sm" type="submit" value="Delete">
-                </form>
-                <%--Update Ad Btn--%>
-                <form action="/edit" method="get">
-                    <input type="hidden" name="ad_id" value="${ad.id}">
-                    <input class="btn btn-primary btn-sm" type="submit" value="Edit">
-                </form>
+                <a href="#" class="btn btn-primary">Edit</a>
             </div>
         </c:forEach>
 
